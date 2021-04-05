@@ -1,0 +1,37 @@
+:root{
+    --results-columns: 2;
+}
+
+.ListOfGifs{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0 16px;
+    align-items: center;
+    min-height: 100vh;
+    grid-template-rows: masonry;
+}
+
+.ListOfGifs-item {
+
+    background-color: #eee;
+    display: inline-block;
+    width: 100%;
+  }
+
+@media (min-width: 768px){
+    :root {
+        --results-columns:3
+    }
+}
+
+@media (min-width: 1024px){
+    :root {
+        --results-columns:4
+    }
+}
+
+@media (min-width: 1440px){
+    :root {
+        --results-columns:6
+    }
+}
