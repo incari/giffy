@@ -1,36 +1,23 @@
-import React, {useState } from "react";
-import {  useLocation } from "wouter";
+import React, {useCallback} from "react";
 import ListOfGifs from "../components/ListOfGifs";
 import LazyTrending from "../components/LazyTrending";
 import useGifs from "../hooks/useGifs";
+import SearchForm from "../components/SearchForm";
+import { useLocation } from "wouter";
 
 
 export default function Home() {
-  const [keyword, setKeyword] = useState("");
   const [path, pushLocation] = useLocation();
-
   const { loading, gifs } = useGifs();
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //ir a otra ruta
+  const handleSubmit= 
+  useCallback( ({keyword})=>{
     pushLocation(`/search/${keyword}`);
-  };
-  const handleChange = (event) => {
-    setKeyword(event.target.value);
-  };
+
+  }, [pushLocation])
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={keyword}
-          name=""
-          id=""
-          onChange={handleChange}
-        />
-      </form>
+     <SearchForm onSubmit={handleSubmit}></SearchForm>
       <h3>Popular Gifs</h3>
       <ListOfGifs gifs={gifs}></ListOfGifs>
       <LazyTrending/>
