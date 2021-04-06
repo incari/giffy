@@ -4,6 +4,7 @@ import ListOfGifs from "../components/ListOfGifs";
 import useGifs from "../hooks/useGifs";
 import useNearScreen from "../hooks/useNearSceen";
 import loader from "../static/loader_coffee.gif";
+import useTitle from "../hooks/useTitle";
 
 export default function SearchResults({ params }) {
   const { keyword } = params;
@@ -12,20 +13,23 @@ export default function SearchResults({ params }) {
 
   const { isNearScreen } = useNearScreen({
     externalRef: loading ? null : externalRef,
-    once: false
+    once: false,
   });
 
-  const debounceHandleNextPage =  useCallback(debounce(
-    () => setPage(prevPage => prevPage+1),500, true),
+  const title = gifs ? `${gifs.length} resultados de ${keyword}`: ""
+
+  useTitle({title} );
+
+
+  const debounceHandleNextPage = useCallback(
+    debounce(() => setPage((prevPage) => prevPage + 1), 500, true),
     []
-  )
-  
-  
+  );
+
   useEffect(() => {
-    console.log(isNearScreen)
+    console.log(isNearScreen);
     if (isNearScreen) debounceHandleNextPage();
   }, [isNearScreen, debounceHandleNextPage]);
-
 
   return (
     <>
