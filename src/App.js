@@ -1,31 +1,29 @@
 import React from "react";
-import "./App.css";
-import { Route, Link } from "wouter";
+import { Route } from "wouter";
+import Header from "./components/Header";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Detail from "./pages/Detail";
 import SearchResults from "./pages/SearchResults";
-import StaticContext from "./context/StaticContext";
-import {GifsContextProvider} from "./context/GifsContext"
 
+import { GifsContextProvider } from "./context/GifsContext";
+import { UserContextProvider } from "./context/UserContext";
+import "./App.css";
 
 export default function App() {
   return (
-    <StaticContext.Provider value={
-      {
-        name: "test",
-        probando: true
-    }
-    }>
+    <UserContextProvider>
       <div className="App">
-        <Link to="/"> HOME</Link>
+        <Header></Header>
         <section className="App-content">
           <GifsContextProvider>
-          <Route path="/" component={Home} />
-          <Route path="/search/:keyword" component={SearchResults} />
-          <Route path="/gif/:id" component={Detail} />
+            <Route path="/" component={Home} />
+            <Route path="/search/:keyword" component={SearchResults} />
+            <Route path="/gif/:id" component={Detail} />
+            <Route path="/login" component={Login} />
           </GifsContextProvider>
         </section>
       </div>
-    </StaticContext.Provider>
+    </UserContextProvider>
   );
 }
