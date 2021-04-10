@@ -1,16 +1,18 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy, useRef } from "react";
 import useNearScreen from "../hooks/useNearSceen";
 
-const TrendingSearches = React.lazy(() => import("./TrendingSearches"));
+const TrendingSearches = lazy(() => import("./TrendingSearches"));
 
 export default function LazyTrending() {
-  const { isNearScreen, fromRef } = useNearScreen();
+  const externalRef = useRef();
+  const { isNearScreen } = useNearScreen({externalRef});
 
   return (
-    <div ref={fromRef}>
+    <>
+      <div id="trending-ref" ref={externalRef}></div>
       <Suspense fallback={"loading..."}>
         {isNearScreen ? <TrendingSearches /> : null}
       </Suspense>
-    </div>
+    </>
   );
 }

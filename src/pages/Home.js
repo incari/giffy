@@ -8,8 +8,8 @@ import useTitle from "../hooks/useTitle";
 
 
 export default function Home() {
-  const [path, pushLocation] = useLocation();
-  const { loading, gifs } = useGifs();
+  const [, pushLocation] = useLocation();
+  const { gifs } = useGifs();
 
   useTitle({title:"Home"})
   const handleSubmit= 
@@ -20,9 +20,9 @@ export default function Home() {
   return (
     <>
      <SearchForm onSubmit={handleSubmit}></SearchForm>
+      <LazyTrending/>
       <h3>Popular Gifs</h3>
       <ListOfGifs gifs={gifs}></ListOfGifs>
-      <LazyTrending/>
     </>
   );
 }

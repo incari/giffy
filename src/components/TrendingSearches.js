@@ -8,6 +8,6 @@ export default function TrendingSearches() {
   useEffect(() => {
     getTrendings().then(setTrends);
   }, []);
-  return <Category name="tredings" options={trends} />;
+  return <Category name="Trendings" options={trends} />;
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "wouter";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import LoginPage from "./pages/LoginPage";
 import Detail from "./pages/Detail";
 import SearchResults from "./pages/SearchResults";
 
@@ -20,7 +20,7 @@ export default function App() {
             <Route path="/" component={Home} />
             <Route path="/search/:keyword" component={SearchResults} />
             <Route path="/gif/:id" component={Detail} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" component={LoginPage} />
           </GifsContextProvider>
         </section>
       </div>

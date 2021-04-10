@@ -5,6 +5,7 @@ import useGifs from "../hooks/useGifs";
 import useNearScreen from "../hooks/useNearSceen";
 import loader from "../static/loader_coffee.gif";
 import useTitle from "../hooks/useTitle";
+import { isElement } from "react-dom/test-utils";
 
 export default function SearchResults({ params }) {
   const { keyword } = params;
@@ -15,19 +16,17 @@ export default function SearchResults({ params }) {
     externalRef: loading ? null : externalRef,
     once: false,
   });
+  console.log(isNearScreen, "search");
+  const title = gifs ? `${gifs.length} resultados de ${keyword}` : "";
 
-  const title = gifs ? `${gifs.length} resultados de ${keyword}`: ""
-
-  useTitle({title} );
-
-
+  useTitle({ title });
+  // eslint-disable-next-line
   const debounceHandleNextPage = useCallback(
     debounce(() => setPage((prevPage) => prevPage + 1), 500, true),
     []
   );
 
   useEffect(() => {
-    console.log(isNearScreen);
     if (isNearScreen) debounceHandleNextPage();
   }, [isNearScreen, debounceHandleNextPage]);
 
